@@ -2,7 +2,8 @@ name: Daily LINE Push
 
 on:
   schedule:
-    - cron: '0 21 * * *'  # 毎朝6:00 JST（= 21:00 UTC）
+    - cron: '0 21 * * *'  # 毎朝6:00（JST）
+  workflow_dispatch:       # ✅ 手動実行を可能にする！
 
 jobs:
   send-line-message:
@@ -21,7 +22,7 @@ jobs:
               "messages": [
                 {
                   "type": "text",
-                  "text": "🌞 おはようございます！これはGitHub Actionsから届いたLINE通知です。"
+                  "text": "🌞 おはようございます！これは GitHub Actions から届いた LINE 通知です。"
                 }
               ]
             }'
