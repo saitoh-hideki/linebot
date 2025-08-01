@@ -1,28 +1,11 @@
-name: Daily LINE Push
+name: GitHub Actions 初テスト
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 21 * * *'  # 毎朝6:00（JST）
 
 jobs:
-  send-line-message:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Send LINE Notification
-        env:
-          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
-          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
-        run: |
-          curl -X POST https://api.line.me/v2/bot/message/push \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $LINE_CHANNEL_ACCESS_TOKEN" \
-            -d '{
-              "to": "'"$LINE_USER_ID"'",
-              "messages": [
-                {
-                  "type": "text",
-                  "text": "✅ GitHub Actions からの LINE 通知（手動 or スケジュール）"
-                }
-              ]
-            }'
+      - name: Echo Test
+        run: echo "🎉 GitHub Actions 成功テストです"
