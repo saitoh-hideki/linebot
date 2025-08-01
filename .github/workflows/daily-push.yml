@@ -1,0 +1,27 @@
+name: Daily LINE Push
+
+on:
+  schedule:
+    - cron: '0 21 * * *'  # 毎朝6:00 JST（= 21:00 UTC）
+
+jobs:
+  send-line-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send LINE Notification
+        env:
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        run: |
+          curl -X POST https://api.line.me/v2/bot/message/push \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $LINE_CHANNEL_ACCESS_TOKEN" \
+            -d '{
+              "to": "'"$LINE_USER_ID"'",
+              "messages": [
+                {
+                  "type": "text",
+                  "text": "🌞 おはようございます！これはGitHub Actionsから届いたLINE通知です。"
+                }
+              ]
+            }'
