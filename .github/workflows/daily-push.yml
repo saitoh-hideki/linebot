@@ -1,9 +1,9 @@
 name: Daily LINE Push
 
 on:
-  workflow_dispatch:        # ✅ 手動実行に対応（GitHubの「Run workflow」ボタンから実行可能）
+  workflow_dispatch:
   schedule:
-    - cron: '0 21 * * *'     # 毎朝6:00（JST）
+    - cron: '0 21 * * *'  # 毎朝6:00（JST）
 
 jobs:
   send-line-message:
@@ -22,7 +22,7 @@ jobs:
               "messages": [
                 {
                   "type": "text",
-                  "text": "✅ GitHub Actions からの LINE 通知（手動 or 毎朝）"
+                  "text": "✅ GitHub Actions からの LINE 通知（手動 or スケジュール）"
                 }
               ]
             }'
